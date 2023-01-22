@@ -9,19 +9,21 @@
     cd 'schedule-calendar' 
     code . 
 
-####  Abrimos um novo terminal e instalamos o Ambiente virtual e iniciamos o nosso projecto django
+####  Abrimos um novo terminal e instalamos o Ambiente virtual e iniciamos o nosso projecto django e aplicacao
 
     virtualenv env  
     source env/bin/activate 
 
 	pip install django==4.1.1
 	django-admin.py startproject core .
+	python manage.py startapp shedulle
 
 #### Criamos alguns ficheiro para as dependencias que serao instaladas, `requirements.txt` efectuamos as alteracoes na model e rodamos os comandos abaixo para criar o banco de dados
 
 	python manage.py migrate
 	python manage.py runserver
     pip install -r requirements.txt  
+	pip install djangorestframework
 
 #### Inicializamos o repositorio remoto do github
 
