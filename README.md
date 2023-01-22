@@ -18,12 +18,21 @@
 	django-admin.py startproject core .
 	python manage.py startapp shedulle
 
-#### Criamos alguns ficheiro para as dependencias que serao instaladas, `requirements.txt` efectuamos as alteracoes na model e rodamos os comandos abaixo para criar o banco de dados
+#### instalar a aplicacao no projecto por intermedio do ficheiro
+
+- `settings.py`
+
+#### Criamos um ficheiro para as dependencias que serao instaladas
+`requirements.txt` efectuamos as alteracoes na model e rodamos os comandos abaixo para criar o banco de dados
 
 	python manage.py migrate
 	python manage.py runserver
     pip install -r requirements.txt  
 	pip install djangorestframework
+
+#### cria um super usuario, para acessar a base de dados atravez da rota admin
+
+	python manage.py createsuperuser
 
 #### Inicializamos o repositorio remoto do github
 
