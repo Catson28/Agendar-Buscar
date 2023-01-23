@@ -1,84 +1,85 @@
 from django.db import models
+# from django.utils import timezone
 
-# Create your models here.
-
-
-class packages(models.Model):
+# Aqui sao criadas a models
+class Package(models.Model):
     name=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
+    def __str__(self):  #funcao para mostrar o nome  e o preco em vez da palavra object
+        return "%s %s" % (self.name, self.price)
 
-class albums(models.Model):
+class Album(models.Model):
     type=models.CharField(max_length=20)
     quantty=models.IntegerField()
     size=models.CharField(max_length=30)
     price=models.CharField(max_length=20)
-    package=models.ManyToManyField("packages") # exemplo de relacionamento de muitos para muitos
-    # idAlbum=models.OneToOneField(packages, on_delete=models.CASCADE) # exemplo de relacionamento de um para um
-    # idAlbum=models.ForeignKey(packages, on_delete=models.CASCADE) # exemplo de relacionamento de um para muitos
+    package=models.ManyToManyField("Package") #Exemplo de relacionamento de muitos para muitos
+    # idAlbum=models.OneToOneField(Package, on_delete=models.CASCADE) # exemplo de relacionamento de um para um
+    # idAlbum=models.ForeignKey(Package, on_delete=models.CASCADE) # exemplo de relacionamento de um para muitos
 
-class frames(models.Model):
+class Frame(models.Model):
     type=models.CharField(max_length=20)
     size=models.CharField(max_length=30)
     price=models.CharField(max_length=20)
-    package=models.ManyToManyField("packages")
+    package=models.ManyToManyField("Package")
 
-class pendrives(models.Model):
+class Pendrive(models.Model):
     type=models.CharField(max_length=30)
     capacity=models.CharField(max_length=20)
     price=models.CharField(max_length=30)
-    package=models.ManyToManyField("packages")
+    package=models.ManyToManyField("Package")
 
-class photographs(models.Model):
+class Photograph(models.Model):
     type=models.CharField(max_length=20)
     size=models.CharField(max_length=30)
     price=models.CharField(max_length=20)
-    albums=models.ManyToManyField("albums")
-    package=models.ManyToManyField("packages")
-    pendrives=models.ManyToManyField("pendrives")
+    Album=models.ManyToManyField("Album")
+    package=models.ManyToManyField("Package")
+    Pendrive=models.ManyToManyField("Pendrive")
 
-class videos(models.Model):
+class Video(models.Model):
     type=models.CharField(max_length=50)
     duration=models.TimeField()
     format=models.CharField(max_length=30)
     price=models.CharField(max_length=20)
-    package=models.ForeignKey(packages, on_delete=models.CASCADE)
-    pendrives=models.ForeignKey(pendrives, on_delete=models.CASCADE)
+    package=models.ForeignKey(Package, on_delete=models.CASCADE)
+    Pendrive=models.ForeignKey(Pendrive, on_delete=models.CASCADE)
 
-class professionals(models.Model):
+class Professional(models.Model):
     area=models.CharField(max_length=30)
     office=models.CharField(max_length=50)
-    package=models.ManyToManyField("packages")
+    package=models.ManyToManyField("Package")
 
-class interested(models.Model):
+class Interested(models.Model):
     name=models.CharField(max_length=50)
     source=models.CharField(max_length=50)
-    package=models.ManyToManyField("packages")
+    package=models.ManyToManyField("Package")
 
 
-class customers(models.Model):
+class Client(models.Model):
     name=models.CharField(max_length=50)
     contact=models.CharField(max_length=15)
-    interested=models.OneToOneField(interested, on_delete=models.CASCADE)
+    Interested=models.OneToOneField(Interested, on_delete=models.CASCADE)
 
-class celebrants(models.Model):
+class Celebrant(models.Model):
     name=models.CharField(max_length=50)
     contact=models.CharField(max_length=15)
-    customers=models.ForeignKey(customers, on_delete=models.CASCADE)
+    Client=models.ForeignKey(Client, on_delete=models.CASCADE)
 
-class locations(models.Model):
+class Place(models.Model):
     name=models.CharField(max_length=50)
     address=models.CharField(max_length=150)
     contact=models.CharField(max_length=50)
-    package=models.ManyToManyField("packages")
+    package=models.ManyToManyField("Package")
 
-class agendas(models.Model):
+class Schedule(models.Model):
     action=models.CharField(max_length=50)
-    star_date=models.DateField()
-    end_date=models.DateField()
+    # star_date=models.DateField(auto_now_add=True, default=timezone.now())
+    # end_date=models.DateField(auto_now_add=True, default=timezone.now())
     icon=models.CharField(max_length=50)
     status=models.BooleanField(max_length=50)
 
-class calendars_candstudio(models.Model):
-    agendas=models.ForeignKey(agendas, on_delete=models.CASCADE)
-    package=models.ForeignKey(packages, on_delete=models.CASCADE)
-    customers=models.ForeignKey(customers, on_delete=models.CASCADE)
+class Schedule_candstudio(models.Model):
+    schedule=models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    package=models.ForeignKey(Package, on_delete=models.CASCADE)
+    Client=models.ForeignKey(Client, on_delete=models.CASCADE)

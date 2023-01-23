@@ -1,29 +1,29 @@
 from django.contrib import admin
-from shedulle.models import packages, albums, frames, photographs, pendrives, videos, professionals, interested, celebrants, customers, locations, agendas, calendars_candstudio
+from shedulle.models import Package, Album, Frame, Photograph, Pendrive, Video, Professional, Interested, Celebrant, Client, Place, Schedule, Schedule_candstudio
 
 # Register your models here.
-admin.site.register(packages)
+admin.site.register(Package)
 
-admin.site.register(albums)
+admin.site.register(Album)
 
-admin.site.register(frames)
+admin.site.register(Frame)
 
-admin.site.register(photographs)
+admin.site.register(Photograph)
 
-admin.site.register(pendrives)
+admin.site.register(Pendrive)
 
-admin.site.register(videos)
+admin.site.register(Video)
 
-admin.site.register(professionals)
+admin.site.register(Professional)
 
-admin.site.register(interested)
+admin.site.register(Interested)
 
-admin.site.register(celebrants)
+admin.site.register(Celebrant)
 
-admin.site.register(customers)
+admin.site.register(Client)
 
-admin.site.register(locations)
+admin.site.register(Place)
 
-admin.site.register(agendas)
+admin.site.register(Schedule)
 
-admin.site.register(calendars_candstudio)
+admin.site.register(Schedule_candstudio)
